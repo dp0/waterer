@@ -12,8 +12,20 @@ DRYNESS_LIMIT = 30000
 PUMP_TIME_SECONDS = 1      # When needed, pump for 1 second
 PUMP_INTERVAL_SECONDS = 60 # and then wait 60 seconds
 
-led = machine.Pin(25, machine.Pin.OUT)
+led = machine.Pin("LED", machine.Pin.OUT)
+
+# Flash LEDs for an easy-to-detect sign of life when booting
 led.low()
+utime.sleep_ms(200)
+led.high()
+utime.sleep_ms(200)
+led.low()
+utime.sleep_ms(100)
+for _ in range(5):
+    led.high()
+    utime.sleep_ms(20)
+    led.low()
+    utime.sleep_ms(20)
 
 sensor = machine.ADC(26)
 
